@@ -6,6 +6,12 @@ const Button = ({ handleClick, text }) => (
   </button>
 );
 
+const VoteNumber = ({votes, selected})  => (
+  <div>
+    {`has ${votes[selected]} votes`}
+  </div>
+)
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often', 
@@ -17,7 +23,26 @@ const App = () => {
     'Programming without an extremely heavy use of console.log() is the same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
   ]
 
+  const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf, 0));
+  // const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf, 0));
   const [selected, setSelected] = useState(0);
+
+  // const points = Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf, 0);
+  console.log("Hippo", votes);
+  console.log("slipper", votes[selected]);
+
+  const handleVotes = () => {
+    console.log("Rhino", votes);
+    // // const copyVotes = [...votes];
+    // // setVotes(copyVotes[selected] += 1);
+    // console.log("shoe", votes[selected]);
+    // // setVotes(votes.splice(selected, 1, votes[selected] + 1));
+    // setVotes(votes.slice(2, 1, 3));
+    let votesCount = [...votes];
+    let voteCount = votesCount[selected] + 1;
+    votesCount[selected] = voteCount;
+    setVotes(votesCount);
+  }
 
   const handleSelected = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
@@ -28,7 +53,13 @@ const App = () => {
       <div>
       {anecdotes[selected]}
       </div>
-      <Button handleClick={handleSelected} text='next anecdote' />
+      <VoteNumber votes={votes} selected={selected} />
+      <span style={{ marginLeft: '0.5em', }}>
+        <Button handleClick={handleVotes} text='vote' />
+      </span>
+      <span style={{ marginLeft: '0.5em', }}>
+        <Button handleClick={handleSelected} text='next anecdote' />
+      </span>
     </div>
   );
 }
