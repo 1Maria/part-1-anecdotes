@@ -24,20 +24,9 @@ const App = () => {
   ]
 
   const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf, 0));
-  // const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf, 0));
   const [selected, setSelected] = useState(0);
 
-  // const points = Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf, 0);
-  console.log("Hippo", votes);
-  console.log("slipper", votes[selected]);
-
   const handleVotes = () => {
-    console.log("Rhino", votes);
-    // // const copyVotes = [...votes];
-    // // setVotes(copyVotes[selected] += 1);
-    // console.log("shoe", votes[selected]);
-    // // setVotes(votes.splice(selected, 1, votes[selected] + 1));
-    // setVotes(votes.slice(2, 1, 3));
     let votesCount = [...votes];
     let voteCount = votesCount[selected] + 1;
     votesCount[selected] = voteCount;
