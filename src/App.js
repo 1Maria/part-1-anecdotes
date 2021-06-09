@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 
+const Header = ({name}) => (
+  <div>
+    <h1>{name}</h1>
+  </div>
+);
+
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>
     {text}
@@ -26,6 +32,8 @@ const App = () => {
   const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf, 0));
   const [selected, setSelected] = useState(0);
 
+  const mostSelected = votes.indexOf(Math.max(...votes));
+
   const handleVotes = () => {
     let votesCount = [...votes];
     let voteCount = votesCount[selected] + 1;
@@ -39,8 +47,9 @@ const App = () => {
 
   return (
     <div>
+      <Header name='Anecdote of the day' />
       <div>
-      {anecdotes[selected]}
+        {anecdotes[selected]}
       </div>
       <VoteNumber votes={votes} selected={selected} />
       <span style={{ marginLeft: '0.5em', }}>
@@ -49,6 +58,11 @@ const App = () => {
       <span style={{ marginLeft: '0.5em', }}>
         <Button handleClick={handleSelected} text='next anecdote' />
       </span>
+      <Header name='Anecdote with the most votes' />
+      <div>
+        {anecdotes[mostSelected]}
+      </div>
+      <VoteNumber votes={votes} selected={mostSelected} />
     </div>
   );
 }
